@@ -2,7 +2,19 @@ import { connectToDB } from "@/db/index";
 import Article from "@/models/Article";
 import Comment from "@/models/Comment";
 
-export const GET = async (request, { params }) => {
+export async function getArticle(id: string) {
+  try {
+    await connectToDB();
+
+    const article = await Article.findById(id);
+
+    return article;
+  } catch (error) {
+    return { message: "Internal Server Error", status: 500 };
+  }
+}
+
+export async function getAllArticles() {
   try {
     await connectToDB();
 
@@ -20,10 +32,8 @@ export const GET = async (request, { params }) => {
       })
     );
 
-    return new Response(JSON.stringify(articlesWithCommentCount), {
-      status: 200,
-    });
+    return articlesWithCommentCount;
   } catch (error) {
-    return new Response("Internal Server Error", { status: 500 });
+    return { message: "Internal Server Error", status: 500 };
   }
-};
+}

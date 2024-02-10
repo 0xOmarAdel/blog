@@ -1,22 +1,9 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import Article from "@/components/Article";
 import { articleType } from "@/types/ArticleType";
+import { getAllArticles } from "@/db/articleActions";
 
-const Articles = () => {
-  const [articles, setArticles] = useState([]);
-
-  useEffect(() => {
-    const fetchArticles = async () => {
-      const response = await fetch("/api/article");
-      const data = await response.json();
-
-      setArticles(data);
-    };
-
-    fetchArticles();
-  }, []);
+const Articles = async () => {
+  const articles = await getAllArticles();
 
   return (
     <div>

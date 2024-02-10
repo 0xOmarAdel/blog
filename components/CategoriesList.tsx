@@ -1,21 +1,9 @@
-"use client";
-
-import { useState, useEffect } from "react";
 import { CategoryType } from "@/types/CategoryType";
+import { getAllCategories } from "@/db/categoryActions";
+import { getArticle } from "@/db/articleActions";
 
-const CategoriesList = () => {
-  const [categories, setCategories] = useState([]);
-
-  const fetchPosts = async () => {
-    const response = await fetch("/api/category");
-    const data = await response.json();
-
-    setCategories(data);
-  };
-
-  useEffect(() => {
-    fetchPosts();
-  }, []);
+const CategoriesList = async () => {
+  const categories = await getAllCategories();
 
   return (
     <div className="col-span-2 space-y-2">

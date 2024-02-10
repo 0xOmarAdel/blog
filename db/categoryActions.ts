@@ -2,13 +2,12 @@ import { connectToDB } from "@/db/index";
 import Category from "@/models/Category";
 import Article from "@/models/Article";
 
-export const GET = async (request, { params }) => {
+export async function getAllCategories() {
   try {
     await connectToDB();
 
     const categories = await Category.find({});
 
-    // Fetch the number of articles for each category
     const categoriesWithArticleCount = await Promise.all(
       categories.map(async (category) => {
         const totalArticles = await Article.countDocuments({
@@ -21,11 +20,8 @@ export const GET = async (request, { params }) => {
       })
     );
 
-    return new Response(JSON.stringify(categoriesWithArticleCount), {
-      status: 200,
-    });
+    return categoriesWithArticleCount;
   } catch (error) {
-    console.log(error);
-    return new Response("Failed to fetch all prompts", { status: 500 });
+    return { message: "Internal Server Error", status: 500 };
   }
-};
+}

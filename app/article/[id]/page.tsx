@@ -1,19 +1,5 @@
-import { connectToDB } from "@/db/index";
-import Article from "@/models/Article";
+import { getArticle } from "@/db/articleActions";
 import Image from "next/image";
-
-async function getArticle(id) {
-  try {
-    await connectToDB();
-
-    const article = await Article.findById(id);
-    if (!Article) return new Response("Article Not Found", { status: 404 });
-
-    return article;
-  } catch (error) {
-    return { message: "Internal Server Error", status: 500 };
-  }
-}
 
 const page = async ({ params }) => {
   const article = await getArticle(params.id);
