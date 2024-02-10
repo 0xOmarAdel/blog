@@ -20,7 +20,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Nav />
-        <div className="mx-72 grid grid-cols-7 gap-16">
+        <div className="mx-72 my-14 grid grid-cols-7 gap-16">
           <div className="col-span-5">{children}</div>
           <CategoriesList />
         </div>
