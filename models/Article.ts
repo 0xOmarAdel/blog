@@ -24,6 +24,6 @@ const articleSchema = new Schema({
   },
 });
 
-const Article = models.Comment || model("Article", articleSchema);
+const Article = models.Article || model("Article", articleSchema);
 
 export default Article;
