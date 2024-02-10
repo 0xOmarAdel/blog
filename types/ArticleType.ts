@@ -5,4 +5,5 @@ export type articleType = {
   description: string;
   createdAt: Date;
   category: string;
+  comments?: number;
 };
