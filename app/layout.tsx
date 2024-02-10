@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Nav from "@/components/layout/Nav";
+import CategoriesList from "@/components/CategoriesList";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,7 +20,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Nav />
-        {children}
+        <div className="mx-72 grid grid-cols-7 gap-16">
+          <div className="col-span-5 grid grid-cols-2 gap-16">{children}</div>
+          <CategoriesList />
+        </div>
       </body>
     </html>
   );
