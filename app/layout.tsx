@@ -21,7 +21,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <Nav />
         <div className="mx-72 grid grid-cols-7 gap-16">
-          <div className="col-span-5 grid grid-cols-2 gap-16">{children}</div>
+          <div className="col-span-5">{children}</div>
           <CategoriesList />
         </div>
       </body>
