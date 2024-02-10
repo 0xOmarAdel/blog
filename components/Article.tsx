@@ -14,7 +14,7 @@ const Article: React.FC<Props> = ({ article }) => {
         <div className="relative block h-56">
           <Image src={article.image} alt="" fill />
           <span className="absolute bottom-0 right-0 pr-3 pl-7 py-1 bg-primary rounded-tl-full text-gray-200">
-            Views: 0
+            Comments: {article.comments}
           </span>
         </div>
         <div className="px-4 py-3">

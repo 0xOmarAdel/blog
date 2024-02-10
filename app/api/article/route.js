@@ -1,15 +1,28 @@
 import { connectToDB } from "@/db/index";
 import Article from "@/models/Article";
+import Comment from "@/models/Comment";
 
 export const GET = async (request, { params }) => {
   try {
     await connectToDB();
 
-    const article = await Article.find({});
+    const articles = await Article.find({});
 
-    if (!Article) return new Response("Article Not Found", { status: 404 });
+    const articlesWithCommentCount = await Promise.all(
+      articles.map(async (article) => {
+        const comments = await Comment.countDocuments({
+          article: article._id,
+        });
+        return {
+          ...article.toObject(),
+          comments,
+        };
+      })
+    );
 
-    return new Response(JSON.stringify(article), { status: 200 });
+    return new Response(JSON.stringify(articlesWithCommentCount), {
+      status: 200,
+    });
   } catch (error) {
     return new Response("Internal Server Error", { status: 500 });
   }
