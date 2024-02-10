@@ -1,5 +1,5 @@
 export type CategoryType = {
-  id: number;
+  _id: string;
   title: string;
   totalArticles?: number;
 };
