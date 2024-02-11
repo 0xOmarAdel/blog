@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Nav from "@/components/layout/Nav";
 import CategoriesList from "@/components/CategoriesList";
+import AuthProvider from "@/context/AuthProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,11 +20,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Nav />
-        <div className="mx-72 my-14 grid grid-cols-7 gap-16">
-          <div className="col-span-5">{children}</div>
-          <CategoriesList />
-        </div>
+        <AuthProvider>
+          <Nav />
+          <div className="mx-72 my-14 grid grid-cols-7 gap-16">
+            <div className="col-span-5">{children}</div>
+            <CategoriesList />
+          </div>
+        </AuthProvider>
       </body>
     </html>
   );
