@@ -37,3 +37,15 @@ export async function getAllArticles() {
     return { message: "Internal Server Error", status: 500 };
   }
 }
+
+export async function getArticleComments(articleId: string) {
+  try {
+    await connectToDB();
+
+    const articleComments = await Comment.find({ article: articleId });
+
+    return articleComments;
+  } catch (error) {
+    return { message: "Internal Server Error", status: 500 };
+  }
+}
