@@ -3,6 +3,7 @@ import Divider from "@/components/ui/Divider";
 import { getArticle, getArticleComments } from "@/db/articleActions";
 import Image from "next/image";
 import { CommentType } from "@/types/CommentType";
+import CommentForm from "@/components/CommentForm";
 
 const page = async ({ params }) => {
   const article = await getArticle(params.id);
@@ -19,6 +20,7 @@ const page = async ({ params }) => {
       <p className="text-lg">{article.description}</p>
       <Divider />
       <div className="flex flex-col gap-6">
+        <CommentForm />
         {articleComments.map((comment: CommentType) => (
           <Comment key={comment._id} comment={comment} />
         ))}
