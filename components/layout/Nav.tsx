@@ -42,9 +42,7 @@ const Nav = () => {
           </button>
         </div>
       ) : (
-        <>
-          <button onClick={() => signIn("google")}>Sign In</button>
-        </>
+        <button onClick={() => signIn("google")}>Sign In</button>
       )}
     </nav>
   );
