@@ -35,7 +35,7 @@ const Nav = () => {
             className="rounded-full"
           />
           <button
-            onClick={() => signOut}
+            onClick={() => signOut()}
             className="text-lg text-gray-500 font-medium"
           >
             Sign Out
