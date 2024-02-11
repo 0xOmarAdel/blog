@@ -4,6 +4,7 @@ import { getArticle, getArticleComments } from "@/db/articleActions";
 import Image from "next/image";
 import { CommentType } from "@/types/CommentType";
 import CommentForm from "@/components/CommentForm";
+import DeleteArticleButton from "@/components/DeleteArticleButton";
 
 const page = async ({ params }) => {
   const article = await getArticle(params.id);
@@ -16,7 +17,12 @@ const page = async ({ params }) => {
       <div className="relative w-full h-[500px]">
         <Image src={article.image} alt="" fill />
       </div>
-      <h2 className="text-3xl text-gray-700 font-semibold">{article.title}</h2>
+      <div className="flex flex-row items-center gap-3">
+        <h2 className="text-3xl text-gray-700 font-semibold">
+          {article.title}
+        </h2>
+        <DeleteArticleButton articleId={params.id} />
+      </div>
       <p className="text-lg">{article.description}</p>
       <Divider />
       <div className="flex flex-col gap-6">

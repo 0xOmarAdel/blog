@@ -49,3 +49,15 @@ export async function getArticleComments(articleId: string) {
     return { message: "Internal Server Error", status: 500 };
   }
 }
+
+export async function deleteArticle(articleId: string) {
+  try {
+    await connectToDB();
+
+    await Article.findByIdAndDelete(articleId);
+
+    return { message: "Article deleted successfully", status: 200 };
+  } catch (error) {
+    return { message: "Internal Server Error", status: 500 };
+  }
+}
