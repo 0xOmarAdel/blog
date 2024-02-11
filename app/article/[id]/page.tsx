@@ -22,7 +22,15 @@ const page = async ({ params }) => {
       <div className="flex flex-col gap-6">
         <CommentForm articleId={params.id} />
         {articleComments.map((comment: CommentType) => (
-          <Comment key={comment._id} comment={comment} />
+          <Comment
+            key={comment._id}
+            _id={comment._id.toString()}
+            text={comment.text}
+            firstName={comment.firstName}
+            lastName={comment.lastName}
+            image={comment.image}
+            createdAt={comment.createdAt}
+          />
         ))}
       </div>
     </div>

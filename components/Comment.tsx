@@ -16,29 +16,33 @@ interface UpdatedSession extends Session {
   };
 }
 
-type Props = {
-  comment: CommentType;
-};
+type Props = Omit<CommentType, "article">;
 
-const Comment: React.FC<Props> = ({ comment }) => {
+const Comment: React.FC<Props> = ({
+  _id,
+  text,
+  firstName,
+  lastName,
+  image,
+}) => {
   const { data: session } = useSession() as { data: UpdatedSession | null };
 
   return (
     <div className="flex flex-row gap-2">
       <Image
-        src={comment.image}
+        src={image}
         width={50}
         height={50}
         className="rounded-full"
-        alt={`${comment.firstName} ${comment.lastName}`}
+        alt={`${firstName} ${lastName}`}
       />
       <div className="flex flex-col gap-0.5">
         <p className="text-lg text-gray-800 font-medium">
-          {comment.firstName} {comment.lastName}
+          {firstName} {lastName}
         </p>
-        <p>{comment.text}</p>
+        <p>{text}</p>
         {session?.user.isAdmin && (
-          <TbTrash onClick={() => deleteComment(comment._id)} />
+          <TbTrash onClick={() => deleteComment(_id)} />
         )}
       </div>
     </div>
