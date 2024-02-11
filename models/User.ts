@@ -6,10 +6,13 @@ const UserSchema = new Schema({
     unique: true,
     required: true,
   },
-  username: {
+  firstName: {
     type: String,
     required: true,
-    unique: true,
+  },
+  lastName: {
+    type: String,
+    required: true,
   },
   image: {
     type: String,
