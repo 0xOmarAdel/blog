@@ -11,7 +11,7 @@ const NewArticleLink = () => {
 
   return (
     <Link
-      href="new"
+      href="/new"
       className="block w-full bg-primary py-2 px-3 text-gray-200 font-medium rounded-md"
     >
       New Article
