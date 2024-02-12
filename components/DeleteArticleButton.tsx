@@ -1,21 +1,29 @@
-"use client";
-
-import { Session } from "next-auth";
-import { useSession } from "next-auth/react";
 import { TbTrash } from "react-icons/tb";
 import { deleteArticle } from "@/db/articleActions";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
 
 type Props = {
   articleId: string;
 };
 
-const DeleteArticleButton: React.FC<Props> = ({ articleId }) => {
-  const { data: session } = useSession()
+const DeleteArticleButton: React.FC<Props> = async ({ articleId }) => {
+  const session = await getServerSession(authOptions);
 
   if (!session?.user?.isAdmin) return;
 
+  const deleteArticleHandler = async () => {
+    "use server";
+
+    deleteArticle(articleId);
+  };
+
   return (
-    <TbTrash className="text-xl" onClick={() => deleteArticle(articleId)} />
+    <form action={deleteArticleHandler}>
+      <button type="submit">
+        <TbTrash className="text-xl" />
+      </button>
+    </form>
   );
 };
 
