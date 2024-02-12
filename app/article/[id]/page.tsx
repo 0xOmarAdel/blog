@@ -6,7 +6,7 @@ import { CommentType } from "@/types/CommentType";
 import CommentForm from "@/components/CommentForm";
 import DeleteArticleButton from "@/components/DeleteArticleButton";
 
-const page = async ({ params }) => {
+const page = async ({ params }: { params: { id: string } }) => {
   const article = await getArticle(params.id);
   const articleComments = (await getArticleComments(
     params.id
