@@ -38,12 +38,13 @@ export const authOptions = {
         const userExists = await User.findOne({ email: profile!.email });
 
         // if not, create a new document and save user in MongoDB
+        console.log(profile);
         if (!userExists) {
           await User.create({
             email: (profile as UpdatedProfile).email,
             firstName: (profile as UpdatedProfile).given_name,
             lastName: (profile as UpdatedProfile).family_name,
-            image: (profile as UpdatedProfile).image!,
+            image: (profile as UpdatedProfile).picture!,
           });
         }
 
