@@ -1,8 +1,15 @@
 import { createArticle } from "@/db/articleActions";
 import { getAllCategories } from "@/db/categoryActions";
 import { CategoryType } from "@/types/CategoryType";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
+import { redirect } from "next/navigation";
 
 const page = async () => {
+  const session = await getServerSession(authOptions);
+
+  if (!session?.user?.isAdmin) redirect("/");
+
   const categories = await getAllCategories();
 
   async function createArticleHandler(formData: FormData) {
