@@ -1,22 +1,26 @@
-"use client";
-
 import Image from "next/image";
-import { useSession } from "next-auth/react";
-import { Session } from "next-auth";
 import { TbTrash } from "react-icons/tb";
 import { CommentType } from "@/types/CommentType";
 import { deleteComment } from "@/db/commentActions";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
 
 type Props = Omit<CommentType, "article">;
 
-const Comment: React.FC<Props> = ({
+const Comment: React.FC<Props> = async ({
   _id,
   text,
   firstName,
   lastName,
   image,
 }) => {
-  const { data: session } = useSession();
+  const session = await getServerSession(authOptions);
+
+  const deleteCommentHandler = async () => {
+    "use server";
+
+    deleteComment(_id);
+  };
 
   return (
     <div className="flex flex-row gap-2">
@@ -33,7 +37,11 @@ const Comment: React.FC<Props> = ({
         </p>
         <p>{text}</p>
         {session?.user.isAdmin && (
-          <TbTrash onClick={() => deleteComment(_id)} />
+          <form action={deleteCommentHandler}>
+            <button type="submit">
+              <TbTrash className="text-xl" />
+            </button>
+          </form>
         )}
       </div>
     </div>
