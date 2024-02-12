@@ -6,11 +6,11 @@ const Articles = async () => {
   const articles = await getAllArticles();
 
   return (
-    <div>
+    <>
       {articles.map((article: articleType) => (
         <Article key={article._id} article={article} />
       ))}
-    </div>
+    </>
   );
 };
 
