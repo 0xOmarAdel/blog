@@ -1,30 +1,39 @@
+"use client";
+
 import { TbTrash } from "react-icons/tb";
-import { deleteArticle } from "@/db/articleActions";
-import { getServerSession } from "next-auth/next";
-import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 type Props = {
   articleId: string;
 };
 
-const DeleteArticleButton: React.FC<Props> = async ({ articleId }) => {
-  const session = await getServerSession(authOptions);
+const DeleteArticleButton: React.FC<Props> = ({ articleId }) => {
+  const { data: session } = useSession();
+  const router = useRouter();
 
   if (!session?.user?.isAdmin) return;
 
   const deleteArticleHandler = async () => {
-    "use server";
+    try {
+      const response = await fetch(`/api/article/${articleId}`, {
+        method: "DELETE",
+      });
 
-    deleteArticle(articleId);
+      const data = await response.json();
+
+      if (response.status === 200) {
+        router.push("/");
+        console.log(data.message);
+      } else {
+        console.log(data.message);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  return (
-    <form action={deleteArticleHandler}>
-      <button type="submit">
-        <TbTrash className="text-xl" />
-      </button>
-    </form>
-  );
+  return <TbTrash className="text-xl" onClick={() => deleteArticleHandler()} />;
 };
 
 export default DeleteArticleButton;
