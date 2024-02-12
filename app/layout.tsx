@@ -4,6 +4,7 @@ import "./globals.css";
 import Nav from "@/components/layout/Nav";
 import CategoriesList from "@/components/CategoriesList";
 import AuthProvider from "@/context/AuthProvider";
+import NewArticleLink from "@/components/NewArticleLink";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,7 +25,10 @@ export default function RootLayout({
           <Nav />
           <div className="mx-72 my-14 grid grid-cols-7 gap-16">
             <div className="col-span-5">{children}</div>
-            <CategoriesList />
+            <div className="col-span-2 flex flex-col gap-4">
+              <NewArticleLink />
+              <CategoriesList />
+            </div>
           </div>
         </AuthProvider>
       </body>

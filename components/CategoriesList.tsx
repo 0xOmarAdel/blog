@@ -6,7 +6,7 @@ const CategoriesList = async () => {
   const categories = await getAllCategories();
 
   return (
-    <div className="col-span-2 space-y-2">
+    <div className="space-y-2">
       <h2 className="text-2xl text-primary font-semibold">Categories</h2>
       <div className="flex flex-col gap-2 text-gray-600 font-medium">
         {categories?.map((category: CategoryType) => (
