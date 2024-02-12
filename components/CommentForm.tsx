@@ -4,7 +4,11 @@ import React from "react";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
 
-const CommentForm = async ({ articleId }) => {
+type Props = {
+  articleId: string;
+};
+
+const CommentForm: React.FC<Props> = async ({ articleId }) => {
   const session = await getServerSession(authOptions);
 
   if (!session?.user) return;
