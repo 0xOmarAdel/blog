@@ -7,15 +7,6 @@ import { TbTrash } from "react-icons/tb";
 import { CommentType } from "@/types/CommentType";
 import { deleteComment } from "@/db/commentActions";
 
-interface UpdatedSession extends Session {
-  user: {
-    name: string;
-    email: string;
-    image: string;
-    isAdmin: boolean;
-  };
-}
-
 type Props = Omit<CommentType, "article">;
 
 const Comment: React.FC<Props> = ({
@@ -25,7 +16,7 @@ const Comment: React.FC<Props> = ({
   lastName,
   image,
 }) => {
-  const { data: session } = useSession() as { data: UpdatedSession | null };
+  const { data: session } = useSession();
 
   return (
     <div className="flex flex-row gap-2">
