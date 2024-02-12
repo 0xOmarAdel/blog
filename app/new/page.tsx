@@ -8,9 +8,9 @@ import { redirect } from "next/navigation";
 const page = async () => {
   const session = await getServerSession(authOptions);
 
-  if (!session?.user?.isAdmin) redirect("/");
-
   const categories = await getAllCategories();
+
+  if (!session?.user?.isAdmin || !categories) redirect("/");
 
   async function createArticleHandler(formData: FormData) {
     "use server";
