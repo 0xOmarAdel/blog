@@ -32,9 +32,7 @@ const page = async ({ params }) => {
             key={comment._id}
             _id={comment._id.toString()}
             text={comment.text}
-            firstName={comment.firstName}
-            lastName={comment.lastName}
-            image={comment.image}
+            user={comment.user}
             createdAt={comment.createdAt}
           />
         ))}
