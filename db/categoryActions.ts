@@ -22,6 +22,6 @@ export async function getAllCategories() {
 
     return categoriesWithArticleCount;
   } catch (error) {
-    return { message: "Internal Server Error", status: 500 };
+    console.log(error);
   }
 }

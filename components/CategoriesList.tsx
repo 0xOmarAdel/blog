@@ -1,9 +1,10 @@
 import { CategoryType } from "@/types/CategoryType";
 import { getAllCategories } from "@/db/categoryActions";
-import { getArticle } from "@/db/articleActions";
 
 const CategoriesList = async () => {
   const categories = await getAllCategories();
+
+  if (!categories) return;
 
   return (
     <div className="space-y-2">
