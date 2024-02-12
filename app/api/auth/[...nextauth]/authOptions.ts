@@ -7,6 +7,7 @@ import { Profile } from "next-auth";
 interface UpdatedProfile extends Profile {
   given_name?: string;
   family_name?: string;
+  picture?: string;
 }
 
 export const authOptions = {
