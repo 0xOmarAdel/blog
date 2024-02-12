@@ -47,7 +47,9 @@ export async function getArticleComments(articleId: string) {
   try {
     await connectToDB();
 
-    const articleComments = await Comment.find({ article: articleId });
+    const articleComments = await Comment.find({ article: articleId }).populate(
+      "user"
+    );
 
     return articleComments;
   } catch (error) {
