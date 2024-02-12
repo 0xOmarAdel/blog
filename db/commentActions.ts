@@ -15,6 +15,7 @@ export async function createComment(
 
     return { message: "Comment created successfully", status: 201 };
   } catch (error) {
+    console.log(error)
     return { message: "Internal Server Error", status: 500 };
   }
 }
