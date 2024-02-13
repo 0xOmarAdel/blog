@@ -8,8 +8,6 @@ import Image from "next/image";
 const Nav = () => {
   const { data: session } = useSession();
 
-  console.log(session);
-
   return (
     <nav className="bg-white py-5 px-72 flex flex-row justify-between items-center shadow-sm">
       <Link href="/" className="text-4xl text-primary font-semibold">
