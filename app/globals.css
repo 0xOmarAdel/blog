@@ -5,3 +5,7 @@
 body {
   @apply bg-secondary;
 }
+
+.Toastify__toast-icon > svg {
+  @apply fill-primary;
+}
