@@ -3,7 +3,7 @@ import { articleType } from "@/types/ArticleType";
 import { getAllArticles } from "@/db/articleActions";
 
 const Articles = async () => {
-  const articles = await getAllArticles();
+  const articles = (await getAllArticles()) as articleType[];
 
   return (
     <>
