@@ -5,6 +5,8 @@ import Nav from "@/components/layout/Nav";
 import CategoriesList from "@/components/CategoriesList";
 import AuthProvider from "@/context/AuthProvider";
 import NewArticleLink from "@/components/NewArticleLink";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -31,6 +33,19 @@ export default function RootLayout({
             </div>
           </div>
         </AuthProvider>
+        <ToastContainer
+          position="bottom-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+          progressStyle={{ backgroundColor: "#7564d8" }}
+        />
       </body>
     </html>
   );

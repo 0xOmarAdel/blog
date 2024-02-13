@@ -4,6 +4,7 @@ import { TbTrash } from "react-icons/tb";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import revalidate from "@/db/revalidate";
+import { toast } from "react-toastify";
 
 type Props = {
   articleId: string;
@@ -24,12 +25,11 @@ const DeleteArticleButton: React.FC<Props> = ({ articleId }) => {
       const data = await response.json();
 
       if (response.status === 200) {
-        revalidate("/");
+        await revalidate("/");
         router.push("/");
-        console.log(data.message);
-      } else {
-        console.log(data.message);
       }
+
+      toast.info(data.message);
     } catch (error) {
       console.log(error);
     }
