@@ -2,6 +2,7 @@
 
 import { TbTrash } from "react-icons/tb";
 import { useSession } from "next-auth/react";
+import revalidate from '@/db/revalidate';
 
 type Props = {
   commentId: string;
@@ -21,6 +22,8 @@ const DeleteCommentButton: React.FC<Props> = ({ commentId }) => {
       const data = await response.json();
 
       if (response.status === 200) {
+        revalidate(`/article/${data.articleId}`);
+
         console.log(data.message);
       } else {
         console.log(data.message);

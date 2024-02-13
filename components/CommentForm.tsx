@@ -3,6 +3,7 @@
 import Image from "next/image";
 import React, { useState } from "react";
 import { useSession } from "next-auth/react";
+import revalidate from "@/db/revalidate";
 
 type Props = {
   articleId: string;
@@ -39,6 +40,7 @@ const CommentForm: React.FC<Props> = ({ articleId }) => {
 
       if (response.status === 200) {
         console.log(data.message);
+        revalidate(`/article/${articleId}`);
       } else {
         console.log(data.message);
       }
