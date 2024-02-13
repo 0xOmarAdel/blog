@@ -11,7 +11,7 @@ const Comment: React.FC<Props> = async ({ _id, text, user }) => {
         src={user.image}
         width={50}
         height={50}
-        className="rounded-full"
+        className="h-fit rounded-full"
         alt={`${user.firstName} ${user.lastName}`}
       />
       <div className="flex flex-col gap-0.5">
