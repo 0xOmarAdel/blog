@@ -35,12 +35,11 @@ const CommentForm: React.FC<Props> = ({ articleId }) => {
         }),
       });
 
-      console.log(response);
-
       const data = await response.json();
 
       if (response.status === 200) {
-        revalidate(`/article/${articleId}`);
+        await revalidate(`/article/${articleId}`);
+        setText("");
       }
 
       toast.info(data.message);
